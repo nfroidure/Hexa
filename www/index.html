@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html manifest="application.manifest" >
+<head>
+	<meta charset="utf-8" />
+	<title>Hexa : Online hexadecimal editor</title>
+	<meta name="description" content="Hexa is a free hexadecimal editor based on web technologies and working off-line." />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<!--[if lt IE 10]><script type="text/javascript">
+		alert('Ooops, you are using an old browser. Please come back with a more recent one.');
+		document.location.href="http://browsehappy.com/";
+	</script><![endif]-->
+	<!-- Requirejs : uncomment for development DEV-->
+	<script data-main="javascript/Application"
+		src="javascript/libs/requirejs/require.js" type="text/javascript"></script>
+	<!-- -->
+	<link rel="icon" type="image/png" href="images/favicon.png" />
+</head>
+<body>
+	<input type="file" />
+	<h1>Hexa</h1>
+	<menu>
+		<a href="app:open" title="Open a file">Open</a>
+		<a href="app:new" title="Create a new file">New</a>
+		<a href="app:save" title="Save changes">Save</a>
+	</menu>
+	<nav>
+		<a href="app:browse?page=begin" title="Go to the begin of the file">Begin</a>
+		<a href="app:browse?page=next" title="Go to the previous page">Previous page</a>
+		<a href="app:browse?page=next" title="Go to the next page">Next page</a>
+		<a href="app:browse?page=end" title="Go to the last page">End</a>
+	</nav>
+	<div class="views">
+		<table style="font-family:monospace;">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">0</th>
+					<th scope="col">1</th>
+					<th scope="col">2</th>
+					<th scope="col">3</th>
+					<th scope="col">4</th>
+					<th scope="col">5</th>
+					<th scope="col">6</th>
+					<th scope="col">7</th>
+					<th scope="col">8</th>
+					<th scope="col">9</th>
+					<th scope="col">A</th>
+					<th scope="col">B</th>
+					<th scope="col">C</th>
+					<th scope="col">D</th>
+					<th scope="col">E</th>
+					<th scope="col">F</th>
+					<th scope="col">0</th>
+					<th scope="col">1</th>
+					<th scope="col">2</th>
+					<th scope="col">3</th>
+					<th scope="col">4</th>
+					<th scope="col">5</th>
+					<th scope="col">6</th>
+					<th scope="col">7</th>
+					<th scope="col">8</th>
+					<th scope="col">9</th>
+					<th scope="col">A</th>
+					<th scope="col">B</th>
+					<th scope="col">C</th>
+					<th scope="col">D</th>
+					<th scope="col">E</th>
+					<th scope="col">F</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">00000000</th>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td><a href="#" title="00000000">0</a><a href="#" title="00000000">0</a></td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+					<td>.</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<tbody>
+				<tr>
+				</tr>
+			</tbody>
+		</table>
+		<form action="app:edit">
+			<p>
+				<label>8 bits signed <input type="number" pace="1" min="-128" max="127" /></label>
+				<label>8 bits unsigned <input type="number" pace="1" min="0" max="255" /></label>
+				<label>16 bits signed <input type="number" pace="1" min="0" max="65535" /></label>
+				<label>16 bits unsigned <input type="number" pace="1" min="-32767" max="32767" /></label>
+				<label>32 bits signed <input type="number" pace="1" min="0" max="4294967296" /></label>
+				<label>32 bits unsigned <input type="number" pace="1" min="-2147483648" max="2147483648" /></label>
+				<label>64 bits signed <input type="number" pace="1" min="0" max="18446744073709551616" /></label>
+				<label>64 bits unsigned <input type="number" pace="1" min="-9223372036854775808" max="9223372036854775808" /></label>
+			</p>
+			<p>
+				<label>Hexadecimal <input type="number" pace="1" min="-128" max="127" /></label>
+				<label>Octal <input type="number" pace="1" min="-128" max="127" /></label>
+				<label>Binary <input type="number" pace="1" min="-128" max="127" /></label>
+				<label>Stream length <input type="number" pace="1" min="1" max="32" /></label>
+			</p>
+			<p>
+				<label><input type="checkbox" /> Display as small endian</label>
+			</p>
+		</form>
+	</div>
+	<!-- Production : comment for development PROD--
+	<script src="javascript/production.js" type="text/javascript"></script>
+	<!-- -->
+</body>
+</html>

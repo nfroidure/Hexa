@@ -1,0 +1,6 @@
+h1 { text-align:center; }
+nav {  }
+table { width:700px; }
+p label { display:inline-block; width:350px; text-align: right; }
+p label input[type='text'], p label input[type='number'] { width:200px; }
+input[type="file"] { visibility:hidden; position:absolute; top:-50px; left:-50px; }
