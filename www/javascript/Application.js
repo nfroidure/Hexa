@@ -84,11 +84,6 @@
 	};
 
 	Application.prototype.select = function(event, params) {
-		if(this.selected) {
-			this.selected.removeAttribute('class');
-		}
-		this.selected=event.target;
-		this.selected.setAttribute('class','selected');
 		this.drawForm((params&&params.index)||0)
 	};
 
@@ -167,10 +162,23 @@
 			this.tbody.appendChild(tr);
 		}
 		table.appendChild(this.tbody);
+		this.byteCells=document.querySelectorAll('table tbody td.byte');
+		this.charCells=document.querySelectorAll('table tbody td.char');
 	};
 
 	Application.prototype.drawForm = function(index) {
-		this.index=index||this.index||0;
+		index=index||this.index||0;
+		if(this.index!=index) {
+			this.byteCells[this.index%(LINES_PER_PAGE*BYTES_PER_LINE)]
+				.firstChild.removeAttribute('class');
+			this.charCells[this.index%(LINES_PER_PAGE*BYTES_PER_LINE)]
+				.firstChild.removeAttribute('class');
+		}
+		this.index=index;
+		this.byteCells[this.index%(LINES_PER_PAGE*BYTES_PER_LINE)]
+			.firstChild.setAttribute('class','selected');
+		this.charCells[this.index%(LINES_PER_PAGE*BYTES_PER_LINE)]
+			.firstChild.setAttribute('class','selected');
 		var littleendian=this.form.elements['littleendian'].checked;
 		var streamlength=this.form.elements['streamlength'].value;
 		this.form.elements['uint8'].value=this.dataView.getUint8(this.index);
