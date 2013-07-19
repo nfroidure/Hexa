@@ -94,7 +94,9 @@
 
 	Application.prototype.change = function(event, params) {
 		if('index'===event.target.getAttribute('name')) {
-			this.index=event.target.value<this.dataView.byteLength?event.target.value:this.dataView.byteLength;
+			this.index=event.target.value<this.dataView.byteLength?event.target.value:this.dataView.byteLength-1;
+			this.page=Math.floor(this.index/(LINES_PER_PAGE*BYTES_PER_LINE));
+			this.drawPage(this.page);
 		}
 		this.drawForm();
 	};
