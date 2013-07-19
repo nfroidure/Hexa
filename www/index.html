@@ -88,17 +88,18 @@
 				<label><span>64 bits signed </span><input type="number" name="int64" pace="1" min="-9223372036854775808" max="9223372036854775807" /></label>-->
 			</p>
 			<p>
+				<label><span>Index </span><input type="number" name="index" min="0" max="0" value="0" /></label>
 				<label><span>Hexadecimal </span><input type="text" name="hex" max="2" pattern="[0-9a-f]{2}" /></label>
 				<label><span>Octal </span><input type="text" name="octal" max="4" pattern="[0-7]{4}" /></label>
 				<label><span>Binary </span><input type="text" name="bin" max="8" pattern="[01]{8}" /></label>
+			</p>
+			<p>
+				<label><input type="checkbox" name="littleendian" /> Display as little endian</label>
 				<label><span>Stream length</span><select name="streamlength">
 					<option value="1">1 byte</option>
 					<option value="2">2 bytes</option>
 					<option value="4">4 bytes</option>
 				</select></label>
-			</p>
-			<p>
-				<label><input type="checkbox" name="littleendian" /> Display as little endian</label>
 			</p>
 		</form>
 	</div>

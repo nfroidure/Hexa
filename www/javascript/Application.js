@@ -93,6 +93,9 @@
 	};
 
 	Application.prototype.change = function(event, params) {
+		if('index'===event.target.getAttribute('name')) {
+			this.index=event.target.value<this.dataView.byteLength?event.target.value:this.dataView.byteLength;
+		}
 		this.drawForm();
 	};
 
@@ -176,9 +179,17 @@
 		this.form.elements['int32'].value=this.dataView.getInt32(this.index,littleendian);
 		//this.form.elements['uint64'].value=this.dataView.getUint64(this.index);
 		//this.form.elements['int64'].value=this.dataView.getInt64(this.index);
-		this.form.elements['hex'].value=this.toFixedString(this.dataView['getUint'+(streamlength*8)](this.index),16,streamlength*2);
-		this.form.elements['octal'].value=this.toFixedString(this.dataView['getUint'+(streamlength*8)](this.index),8,streamlength*4);
-		this.form.elements['bin'].value=this.toFixedString(this.dataView['getUint'+(streamlength*8)](this.index),2,streamlength*8);
+		this.form.elements['index'].setAttribute('max',this.dataView.byteLength-1);
+		this.form.elements['index'].value=this.index;
+		this.form.elements['hex'].setAttribute('pattern','[0-9a-f]{'+(streamlength*2)+'}');
+		this.form.elements['hex'].value=this.toFixedString(
+			this.dataView['getUint'+(streamlength*8)](this.index),16,streamlength*2);
+		this.form.elements['octal'].setAttribute('pattern','[0-8]{'+(streamlength*4)+'}');
+		this.form.elements['octal'].value=this.toFixedString(
+			this.dataView['getUint'+(streamlength*8)](this.index),8,streamlength*4);
+		this.form.elements['bin'].setAttribute('pattern','[01]{'+(streamlength*8)+'}');
+		this.form.elements['bin'].value=this.toFixedString(
+			this.dataView['getUint'+(streamlength*8)](this.index),2,streamlength*8);
 	};
 
 	/* Utils */
