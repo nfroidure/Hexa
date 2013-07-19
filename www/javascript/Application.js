@@ -1,4 +1,4 @@
-// MIDIPlayer : Play a MIDIFile instance
+// Hexa : Full front Hexadecimal editor
 
 // AMD + global + NodeJS : You can use this object by inserting a script
 // or using an AMD loader (like RequireJS) or using NodeJS
@@ -14,10 +14,12 @@
 		this.fileName='newfile.bin'
 		this.dataView=null;
 		this.page=0;
+		this.maxPage=0;
 		this.index=0;
 		// Registering ui elements
 		this.filePicker=document.querySelector('input[type="file"]');
 		this.form=document.querySelector('form');
+		this.pages=document.querySelector('nav span');
 		// Regsitering events
 	  this.filePicker.addEventListener('change', function(event){
 			if(event.target.files.length)
@@ -34,16 +36,51 @@
 		this.tbody.removeChild(this.tbody.firstChild);
 		// Commands management
 		this.cmdMgr=new Commandor(document.documentElement);
-		this.cmdMgr.suscribe('open',this.pickFile.bind(this));
+		this.cmdMgr.suscribe('open',this.open.bind(this));
+		this.cmdMgr.suscribe('new',this.newFile.bind(this));
+		this.cmdMgr.suscribe('save',this.save.bind(this));
+		this.cmdMgr.suscribe('browse',this.browse.bind(this));
 		this.cmdMgr.suscribe('select',this.select.bind(this));
+		this.cmdMgr.suscribe('change',this.change.bind(this));
 		// Starting
 		this.loadBuffer();
 	}
 
 	/* Command functions */
 
-	Application.prototype.pickFile = function() {
+	Application.prototype.open = function() {
 		this.filePicker.click();
+	};
+
+	Application.prototype.newFile = function() {
+		this.loadBuffer();
+	};
+
+	Application.prototype.save = function() {
+		var file=new Blob([this.dataView], {type: "application/octet-binary"});
+		window.open(URL.createObjectURL(file));
+		/*
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend=(function(event) {
+			window.open(event.target.result);
+ 		}).bind(this);*/
+	};
+
+	Application.prototype.browse = function(event, params) {
+		var page=this.page;
+		if('begin'===params.page) {
+			page=0;
+		} else if('previous'===params.page) {
+			page=page-->0?page:0;
+		}else if('next'===params.page) {
+			page=page++<this.maxPage?page:this.maxPage;
+		} else if('end'===params.page) {
+			page=this.maxPage;
+		}
+		console.log(page);
+		if(page!==this.page)
+			this.drawPage(page);
 	};
 
 	Application.prototype.select = function(event, params) {
@@ -53,6 +90,10 @@
 		this.selected=event.target;
 		this.selected.setAttribute('class','selected');
 		this.drawForm((params&&params.index)||0)
+	};
+
+	Application.prototype.change = function(event, params) {
+		this.drawForm();
 	};
 
 	/* Internals functions */
@@ -69,6 +110,7 @@
 		if(!buffer)
 			buffer=new ArrayBuffer(32);
 		this.dataView=new DataView(buffer);
+		this.maxPage=Math.floor(this.dataView.byteLength/(LINES_PER_PAGE*BYTES_PER_LINE));
 		this.drawPage(0);
 		this.drawForm(0);
 	};
@@ -77,6 +119,7 @@
 
 	Application.prototype.drawPage = function(page) {
 		this.page=page||0;
+		this.pages.firstChild.textContent=(this.page+1)+'/'+(this.maxPage+1);
 		while(this.tbody.firstChild) {
 			this.tbody.removeChild(this.tbody.firstChild);
 		}
@@ -107,7 +150,7 @@
 			for(var k=i*BYTES_PER_LINE, l=k+BYTES_PER_LINE; k<l; k++) {
 				td=this.charTd.cloneNode(true);
 				if(k<this.dataView.buffer.byteLength) {
-					charValue=(this.dataView.getUint8(k)>31?String.fromCharCode(charCode):'.');
+					charValue=(this.dataView.getUint8(k)>31?String.fromCharCode(this.dataView.getUint8(k)):'.');
 				} else {
 					charValue=' ';
 				}
@@ -122,8 +165,9 @@
 	};
 
 	Application.prototype.drawForm = function(index) {
-		this.index=index||0;
+		this.index=index||this.index||0;
 		var littleendian=this.form.elements['littleendian'].checked;
+		var streamlength=this.form.elements['streamlength'].value;
 		this.form.elements['uint8'].value=this.dataView.getUint8(this.index);
 		this.form.elements['int8'].value=this.dataView.getInt8(this.index);
 		this.form.elements['uint16'].value=this.dataView.getUint16(this.index,littleendian);
@@ -132,10 +176,9 @@
 		this.form.elements['int32'].value=this.dataView.getInt32(this.index,littleendian);
 		//this.form.elements['uint64'].value=this.dataView.getUint64(this.index);
 		//this.form.elements['int64'].value=this.dataView.getInt64(this.index);
-		this.form.elements['hex'].value=this.toFixedString(this.dataView.getUint8(this.index),16,2);
-		this.form.elements['hex'].value=this.toFixedString(this.dataView.getUint8(this.index),16,2);
-		this.form.elements['octal'].value=this.toFixedString(this.dataView.getUint8(this.index),8,4);
-		this.form.elements['bin'].value=this.toFixedString(this.dataView.getUint8(this.index),2,8);
+		this.form.elements['hex'].value=this.toFixedString(this.dataView['getUint'+(streamlength*8)](this.index),16,streamlength*2);
+		this.form.elements['octal'].value=this.toFixedString(this.dataView['getUint'+(streamlength*8)](this.index),8,streamlength*4);
+		this.form.elements['bin'].value=this.toFixedString(this.dataView['getUint'+(streamlength*8)](this.index),2,streamlength*8);
 	};
 
 	/* Utils */
