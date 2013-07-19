@@ -18,19 +18,19 @@
 </head>
 <body>
 	<input type="file" />
+	<div class="hexa">
 	<h1>Hexa</h1>
-	<menu>
-		<a href="app:open" title="Open a file">Open</a>
-		<a href="app:new" title="Create a new file">New</a>
-		<a href="app:save" title="Save changes">Save</a>
-	</menu>
-	<nav>
-		<a href="app:browse?page=begin" title="Go to the begin of the file">Begin</a>
-		<a href="app:browse?page=next" title="Go to the previous page">Previous page</a>
-		<a href="app:browse?page=next" title="Go to the next page">Next page</a>
-		<a href="app:browse?page=end" title="Go to the last page">End</a>
-	</nav>
-	<div class="views">
+		<menu>
+			<a href="app:open" title="Open a file">Open</a>
+			<a href="app:new" title="Create a new file">New</a>
+			<a href="app:save" title="Save changes">Save</a>
+		</menu>
+		<nav>
+			<a href="app:browse?page=begin" title="Go to the begin of the file">Begin</a>
+			<a href="app:browse?page=next" title="Go to the previous page">Previous</a>
+			<a href="app:browse?page=next" title="Go to the next page">Next</a>
+			<a href="app:browse?page=end" title="Go to the last page">End</a>
+		</nav>
 		<table style="font-family:monospace;">
 			<thead>
 				<tr>
@@ -75,31 +75,29 @@
 					<td><a href="app:select?index=" title="Select the char at ">.</a></td>
 			</tr></tbody>
 		</table>
-		<table>
-			<tbody>
-				<tr>
-				</tr>
-			</tbody>
-		</table>
-		<form action="app:edit">
+		<form action="app:edit" data-change="app:change">
 			<p>
-				<label>8 bits signed <input type="number" pace="1" min="-128" max="127" /></label>
-				<label>8 bits unsigned <input type="number" pace="1" min="0" max="255" /></label>
-				<label>16 bits signed <input type="number" pace="1" min="0" max="65535" /></label>
-				<label>16 bits unsigned <input type="number" pace="1" min="-32767" max="32767" /></label>
-				<label>32 bits signed <input type="number" pace="1" min="0" max="4294967296" /></label>
-				<label>32 bits unsigned <input type="number" pace="1" min="-2147483648" max="2147483648" /></label>
-				<label>64 bits signed <input type="number" pace="1" min="0" max="18446744073709551616" /></label>
-				<label>64 bits unsigned <input type="number" pace="1" min="-9223372036854775808" max="9223372036854775808" /></label>
+				<label><span>8 bits unsigned </span><input type="number" name="uint8" pace="1" min="-128" max="127" /></label>
+				<label><span>8 bits signed </span><input type="number" name="int8" pace="1" min="0" max="255" /></label>
+				<label><span>16 bits unsigned </span><input type="number" name="uint16" pace="1" min="0" max="65535" /></label>
+				<label><span>16 bits signed </span><input type="number" name="int16" pace="1" min="-32768" max="32767" /></label>
+				<label><span>32 bits unsigned </span><input type="number" name="uint32" pace="1" min="0" max="4294967295" /></label>
+				<label><span>32 bits signed </span><input type="number" name="int32" pace="1" min="-2147483648" max="2147483647" /></label><!--
+				<label><span>64 bits unsigned </span><input type="number" name="uint64" pace="1" min="0" max="18446744073709551616" /></label>
+				<label><span>64 bits signed </span><input type="number" name="int64" pace="1" min="-9223372036854775808" max="9223372036854775807" /></label>-->
 			</p>
 			<p>
-				<label>Hexadecimal <input type="number" pace="1" min="-128" max="127" /></label>
-				<label>Octal <input type="number" pace="1" min="-128" max="127" /></label>
-				<label>Binary <input type="number" pace="1" min="-128" max="127" /></label>
-				<label>Stream length <input type="number" pace="1" min="1" max="32" /></label>
+				<label><span>Hexadecimal </span><input type="text" name="hex" max="2" pattern="[0-9a-f]{2}" /></label>
+				<label><span>Octal </span><input type="text" name="octal" max="4" pattern="[0-7]{4}" /></label>
+				<label><span>Binary </span><input type="text" name="bin" max="8" pattern="[01]{8}" /></label>
+				<label><span>Stream length</span><select name="length">
+					<option value="1">1 byte</option>
+					<option value="2">2 bytes</option>
+					<option value="4">4 bytes</option>
+				</select></label>
 			</p>
 			<p>
-				<label><input type="checkbox" /> Display as small endian</label>
+				<label><input type="checkbox" name="littleendian" /> Display as little endian</label>
 			</p>
 		</form>
 	</div>
