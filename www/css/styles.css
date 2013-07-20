@@ -1,8 +1,11 @@
+body { background:#f0f0f0; }
 div.hexa { min-width:600px; max-width:800px; margin:0 auto; }
 h1 { text-align:center; }
-nav {  }
-table { width:100%; font-family:monospace; font-size:14px; }
-table a.selected { color:red; }
+menu { float:left; padding:0 0 15px 0; margin:0; }
+nav { float:right; padding:0 0 15px 0; margin:0; }
+table { clear:both; width:100%; font-family:monospace; font-size:14px; }
+table a { display:block; text-align:center; text-decoration:none; color:#000; }
+table a.selected { color:#fff; background:#333; font-weight:bold; }
 p label { display:inline-block; width:49%; text-align:right; }
 p label span { display:inline-block; width:180px; padding:0 10px 0 0; }
 p label input[type='text'], p label input[type='number'] { width:180px; }
