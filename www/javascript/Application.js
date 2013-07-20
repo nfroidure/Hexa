@@ -167,7 +167,9 @@
 	};
 
 	Application.prototype.drawForm = function(index) {
-		index=index||this.index||0;
+		if('undefined'===typeof index) {
+			index=this.index||0;
+		}
 		if(this.index!=index) {
 			this.byteCells[this.index%(LINES_PER_PAGE*BYTES_PER_LINE)]
 				.firstChild.removeAttribute('class');
