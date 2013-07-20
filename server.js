@@ -127,7 +127,8 @@ var httpServer=http.createServer(function (request, response) {
 				code=200;
 			}
 			if('GET'===request.method) {
-				if(0===MIME_TYPES[ext].indexOf('text/')) {
+				if(0===MIME_TYPES[ext].indexOf('text/')
+					&&request.headers['accept-encoding']) {
 					// setting content encoding
 					if(request.headers['accept-encoding'].match(/\bdeflate\b/)) {
 						headers['Content-Encoding'] = 'deflate';
