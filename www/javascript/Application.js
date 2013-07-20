@@ -11,8 +11,6 @@
 
 	function Application() {
 		// Properties
-		this.fileName='newfile.bin';
-		this.fileMime='application/octet-binary';
 		this.dataView=null;
 		this.page=0;
 		this.maxPage=0;
@@ -20,7 +18,8 @@
 		// Registering ui elements
 		this.filePicker=document.querySelector('input[type="file"]');
 		this.form=document.querySelector('form');
-		this.pages=document.querySelector('nav span');
+		this.fileInfo=document.querySelector('nav span');
+		this.pages=document.querySelectorAll('nav span')[1];
 		// Regsitering events
 	  this.filePicker.addEventListener('change', function(event){
 			if(event.target.files.length)
@@ -54,11 +53,13 @@
 	};
 
 	Application.prototype.newFile = function() {
+		this.fileName='newfile.bin';
+		this.fileMime='application/octet-binary';
 		this.loadBuffer();
 	};
 
 	Application.prototype.save = function() {
-		var file=new Blob([this.dataView], {type: (this.fileMime||'application/octet-binary')});
+		var file=new Blob([this.dataView], {type: this.fileMime});
 		window.open(URL.createObjectURL(file));
 		/*
 		var reader = new FileReader();
@@ -100,7 +101,7 @@
 
 	Application.prototype.readFile = function(file) {
 		this.fileName=file.name;
-		this.fileMime=file.type;
+		this.fileMime=file.type||'application/octet-binary';
 		var reader = new FileReader();
 		reader.readAsArrayBuffer(file);
 		reader.onloadend=(function(event) {
@@ -109,6 +110,7 @@
 	};
 
 	Application.prototype.loadBuffer = function(buffer) {
+		this.fileInfo.innerHTML=this.fileName+'['+this.fileMime+']';
 		if(!buffer)
 			buffer=new ArrayBuffer(32);
 		this.dataView=new DataView(buffer);
