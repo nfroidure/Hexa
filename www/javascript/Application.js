@@ -11,7 +11,8 @@
 
 	function Application() {
 		// Properties
-		this.fileName='newfile.bin'
+		this.fileName='newfile.bin';
+		this.fileMime='application/octet-binary';
 		this.dataView=null;
 		this.page=0;
 		this.maxPage=0;
@@ -57,7 +58,7 @@
 	};
 
 	Application.prototype.save = function() {
-		var file=new Blob([this.dataView], {type: "application/octet-binary"});
+		var file=new Blob([this.dataView], {type: (this.fileMime||'application/octet-binary')});
 		window.open(URL.createObjectURL(file));
 		/*
 		var reader = new FileReader();
@@ -78,7 +79,6 @@
 		} else if('end'===params.page) {
 			page=this.maxPage;
 		}
-		console.log(page);
 		if(page!==this.page)
 			this.drawPage(page);
 	};
@@ -99,6 +99,8 @@
 	/* Internals functions */
 
 	Application.prototype.readFile = function(file) {
+		this.fileName=file.name;
+		this.fileMime=file.type;
 		var reader = new FileReader();
 		reader.readAsArrayBuffer(file);
 		reader.onloadend=(function(event) {
@@ -131,7 +133,7 @@
 			tr=document.createElement('tr');
 			// line header
 			th=this.rowTh.cloneNode(true);
-			th.innerHTML=(i*BYTES_PER_LINE).toString(16);
+			th.innerHTML=this.toFixedString(i*BYTES_PER_LINE,16,6);
 			tr.appendChild(th);
 			// printing bytes
 			for(var k=i*BYTES_PER_LINE, l=k+BYTES_PER_LINE; k<l; k++) {

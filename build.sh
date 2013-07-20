@@ -27,8 +27,8 @@ mv /tmp/production.js javascript/production.js
 # Sending if server given
 if [ "$2" != "" ]; then
 	cd ..
-	rsync -Haurov --exclude=/.git/ --exclude=/node_modules/ --exclude=/materials/ --exclude=/www/javascript/ ./ "$2:/home/karaoke/player/"
-	scp www/javascript/production.js "$2:/home/karaoke/player/www/javascript/production.js"
+	rsync -Haurov --exclude=/.git/ --exclude=/node_modules/ --exclude=/materials/ --exclude=/www/javascript/ ./ "$2:/home/hexa/"
+	scp www/javascript/production.js "$2:/home/hexa/www/javascript/production.js"
 fi
 # Back to the right pwd
 cd "$olPwd"
