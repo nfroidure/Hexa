@@ -11,6 +11,8 @@
 
 	function Application() {
 		// Properties
+		this.fileName='newfile.bin';
+		this.fileMime='application/octet-binary';
 		this.dataView=null;
 		this.page=0;
 		this.maxPage=0;
