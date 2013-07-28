@@ -54,68 +54,46 @@
      showgrid="false"
      inkscape:zoom="1.4142136"
      inkscape:cx="-48.266076"
-     inkscape:cy="-8.0516736"
+     inkscape:cy="-66.034428"
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="g2825" />
   <title
      id="title4">HTML5 Logo</title>
   <g
      id="g2825">
     <polygon
        transform="matrix(0.27437869,0,0,0.27437869,-6.0974455,-19.384568)"
-       style="fill:#ff0000"
+       style="fill:#b3b3b3"
        id="polygon6"
        points="74.633,100.62 437.367,100.62 404.321,470.819 255.778,512 107.644,470.877 " />
     <polygon
        transform="matrix(0.27437869,0,0,0.27437869,-6.0974455,-19.384568)"
-       style="fill:#ff8080"
+       style="fill:#cccccc"
        id="polygon8"
        points="376.03,447.246 404.27,130.894 256,130.894 256,480.523 " />
     <text
        sodipodi:linespacing="125%"
-       id="text2825"
-       y="85.573593"
-       x="29.112698"
-       style="font-size:64px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Gentium Book Basic;-inkscape-font-specification:Gentium Book Basic Bold"
+       id="text2823"
+       y="96.058876"
+       x="64.342377"
+       style="font-size:113.42115020999999331px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#808080;fill-opacity:1;stroke:none;font-family:Gentium Book Basic;-inkscape-font-specification:Gentium Book Basic Bold"
        xml:space="preserve"><tspan
-         y="85.573593"
-         x="29.112698"
-         id="tspan2827"
-         sodipodi:role="line">16</tspan></text>
+         y="96.058876"
+         x="64.342377"
+         id="tspan2825"
+         sodipodi:role="line">F</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:64px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Gentium Book Basic;-inkscape-font-specification:Gentium Book Basic Bold"
-       x="31.112698"
-       y="85.573593"
+       style="font-size:113.42115021px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Gentium Book Basic;-inkscape-font-specification:Gentium Book Basic Bold"
+       x="67.886787"
+       y="96.058876"
        id="text2817"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan2819"
-         x="31.112698"
-         y="85.573593">16</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text2829"
-       y="37.490334"
-       x="40.790367"
-       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Gentium Book Basic;-inkscape-font-specification:Gentium Book Basic Bold"
-       xml:space="preserve"><tspan
-         y="37.490334"
-         x="40.790367"
-         id="tspan2831"
-         sodipodi:role="line">Hex</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Gentium Book Basic;-inkscape-font-specification:Gentium Book Basic Bold"
-       x="42.790367"
-       y="37.490334"
-       id="text2821"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2823"
-         x="42.790367"
-         y="37.490334">Hex</tspan></text>
+         x="67.886787"
+         y="96.058876">F</tspan></text>
   </g>
 </svg>
