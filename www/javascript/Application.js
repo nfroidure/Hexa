@@ -88,12 +88,12 @@
 	};
 
 	Application.prototype.select = function(event, params) {
-		this.drawForm((params&&params.index)||0)
+		this.drawForm(params&&parseInt(params.index,10)||0)
 	};
 
 	Application.prototype.change = function(event, params) {
 		if('index'===event.target.getAttribute('name')) {
-			this.index=event.target.value<this.dataView.byteLength?event.target.value:this.dataView.byteLength-1;
+			this.index=parseInt((event.target.value<this.dataView.byteLength?event.target.value:this.dataView.byteLength-1),10);
 			this.page=Math.floor(this.index/(LINES_PER_PAGE*BYTES_PER_LINE));
 			this.drawPage(this.page);
 		}
@@ -189,26 +189,57 @@
 		this.charCells[this.index%(LINES_PER_PAGE*BYTES_PER_LINE)]
 			.firstChild.setAttribute('class','selected');
 		var littleendian=this.form.elements['littleendian'].checked;
-		var streamlength=this.form.elements['streamlength'].value;
+		var streamlength=parseInt(this.form.elements['streamlength'].value,10);
 		this.form.elements['uint8'].value=this.dataView.getUint8(this.index);
 		this.form.elements['int8'].value=this.dataView.getInt8(this.index);
-		this.form.elements['uint16'].value=this.dataView.getUint16(this.index,littleendian);
-		this.form.elements['int16'].value=this.dataView.getInt16(this.index,littleendian);
-		this.form.elements['uint32'].value=this.dataView.getUint32(this.index,littleendian);
-		this.form.elements['int32'].value=this.dataView.getInt32(this.index,littleendian);
-		//this.form.elements['uint64'].value=this.dataView.getUint64(this.index);
-		//this.form.elements['int64'].value=this.dataView.getInt64(this.index);
+		if(this.index+1<this.dataView.buffer.byteLength) {
+			this.form.elements['uint16'].removeAttribute('disabled');
+			this.form.elements['uint16'].value=this.dataView.getUint16(this.index,littleendian);
+			this.form.elements['int16'].removeAttribute('disabled');
+			this.form.elements['int16'].value=this.dataView.getInt16(this.index,littleendian);
+		} else {
+			this.form.elements['uint16'].setAttribute('disabled','disabled');
+			this.form.elements['uint16'].value='';
+			this.form.elements['int16'].setAttribute('disabled','disabled');
+			this.form.elements['int16'].value='';
+		}
+		if(this.index+3<this.dataView.buffer.byteLength) {
+			this.form.elements['uint32'].removeAttribute('disabled');
+			this.form.elements['uint32'].value=this.dataView.getUint32(this.index,littleendian);
+			this.form.elements['int32'].removeAttribute('disabled');
+			this.form.elements['int32'].value=this.dataView.getInt32(this.index,littleendian);
+		} else {
+			this.form.elements['uint32'].setAttribute('disabled','disabled');
+			this.form.elements['uint32'].value='';
+			this.form.elements['int32'].setAttribute('disabled','disabled');
+			this.form.elements['int32'].value='';
+		}
 		this.form.elements['index'].setAttribute('max',this.dataView.byteLength-1);
 		this.form.elements['index'].value=this.index;
-		this.form.elements['hex'].setAttribute('pattern','[0-9a-f]{'+(streamlength*2)+'}');
-		this.form.elements['hex'].value=this.toFixedString(
-			this.dataView['getUint'+(streamlength*8)](this.index),16,streamlength*2);
-		this.form.elements['octal'].setAttribute('pattern','[0-8]{'+(streamlength*4)+'}');
-		this.form.elements['octal'].value=this.toFixedString(
-			this.dataView['getUint'+(streamlength*8)](this.index),8,streamlength*4);
-		this.form.elements['bin'].setAttribute('pattern','[01]{'+(streamlength*8)+'}');
-		this.form.elements['bin'].value=this.toFixedString(
-			this.dataView['getUint'+(streamlength*8)](this.index),2,streamlength*8);
+		if(this.index-1+streamlength<this.dataView.buffer.byteLength) {
+			this.form.elements['hex'].removeAttribute('disabled');
+			this.form.elements['hex'].setAttribute('pattern','[0-9a-f]{'+(streamlength*2)+'}');
+			this.form.elements['hex'].value=this.toFixedString(
+				this.dataView['getUint'+(streamlength*8)](this.index),16,streamlength*2);
+			this.form.elements['octal'].removeAttribute('disabled');
+			this.form.elements['octal'].setAttribute('pattern','[0-8]{'+(streamlength*4)+'}');
+			this.form.elements['octal'].value=this.toFixedString(
+				this.dataView['getUint'+(streamlength*8)](this.index),8,streamlength*4);
+			this.form.elements['bin'].removeAttribute('disabled');
+			this.form.elements['bin'].setAttribute('pattern','[01]{'+(streamlength*8)+'}');
+			this.form.elements['bin'].value=this.toFixedString(
+				this.dataView['getUint'+(streamlength*8)](this.index),2,streamlength*8);
+		} else {
+			this.form.elements['hex'].removeAttribute('pattern');
+			this.form.elements['hex'].setAttribute('disabled','disabled');
+			this.form.elements['hex'].value='';
+			this.form.elements['octal'].removeAttribute('pattern');
+			this.form.elements['octal'].setAttribute('disabled','disabled');
+			this.form.elements['octal'].value='';
+			this.form.elements['bin'].removeAttribute('pattern');
+			this.form.elements['bin'].setAttribute('disabled','disabled');
+			this.form.elements['bin'].value='';
+		}
 	};
 
 	/* IPC */
