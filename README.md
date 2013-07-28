@@ -3,6 +3,8 @@ Hexa
 
 Hexa is a project intended to provide a client side Web based hexadecimal editor.
 
+It's actually currently just a viewer, but the project is going on ;).
+
 You can test it there : http://hexa.insertafter.com
 
 Debugging buffers
@@ -19,11 +21,13 @@ reader.readAsArrayBuffer(file);
 reader.onloadend=function(event) {
 	hexa.postMessage(event.target.result,'*');
 };
-
 ```
-Transferable object are not accessible anymore once transfered. To avoid this, user :
+
+Transferable object are not accessible anymore once transfered. To avoid this, use :
+
 ```js
-buffer.slice(0); // not available on IE 10
+buffer=buffer.slice(0); // not available on IE10
+hexa.postMessage(buffer,'*');
 ```
 
 License
