@@ -80,7 +80,7 @@ var httpServer=http.createServer(function (request, response) {
 		return;
 	}
 	// No query params
-	if('search' in parsedUrl) {
+	if(parsedUrl.search) {
 		response.writeHead(401);
 		response.end();
 	}
