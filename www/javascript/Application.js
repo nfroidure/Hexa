@@ -22,11 +22,12 @@
 		this.form=document.querySelector('form');
 		this.fileInfo=document.querySelector('nav span');
 		this.pages=document.querySelectorAll('nav span')[1];
-		// Regsitering events
+		// Registering events
 	  this.filePicker.addEventListener('change', function(event){
 			if(event.target.files.length)
 		  	this.readFile(event.target.files[0]);
 	  }.bind(this));
+	  window.addEventListener("message", this.handleMessage.bind(this), false);
 		// Retrieving template elements
 		this.tbody=document.querySelector('table tbody');
 		this.rowTh=document.querySelector('table tbody tr th');
@@ -208,6 +209,16 @@
 		this.form.elements['bin'].setAttribute('pattern','[01]{'+(streamlength*8)+'}');
 		this.form.elements['bin'].value=this.toFixedString(
 			this.dataView['getUint'+(streamlength*8)](this.index),2,streamlength*8);
+	};
+
+	/* IPC */
+
+	Application.prototype.handleMessage = function(event) {
+		if(event.data instanceof ArrayBuffer) {
+			this.fileName=event.origin.replace(/https?:\/\/([^:\/]+)(?:.*)/,'$1')+'.bin';
+			this.fileMime='application/octet-binary';
+			this.loadBuffer(event.data);
+		}
 	};
 
 	/* Utils */
