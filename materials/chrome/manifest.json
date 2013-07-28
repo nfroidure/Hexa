@@ -1,0 +1,22 @@
+{
+	"name": "Hexa",
+	"description": "View ArrayBuffers, Blobs content in this web based hexadecimal viewer.",
+	"version": "1",
+	"icons": {
+		"16": "icon-16.png",
+		"48": "icon-48.png",
+		"128": "icon-128.png"
+	},
+	"app": {
+		"urls": [
+			"http://hexa.insertafter.com/index.html"
+		],
+		"launch": {
+			"web_url": "http://hexa.insertafter.com/index.html"
+		}
+	},
+	"permissions": [
+		"unlimitedStorage"
+	],
+	"manifest_version": 2
+}
