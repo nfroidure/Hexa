@@ -88,7 +88,10 @@
 	};
 
 	Application.prototype.select = function(event, params) {
-		this.drawForm(params&&parseInt(params.index,10)||0)
+		var index=params&&parseInt(params.index,10)||0;
+		if(index>=this.dataView.byteLength)
+			index=this.dataView.byteLength-1;
+		this.drawForm(index)
 	};
 
 	Application.prototype.change = function(event, params) {
