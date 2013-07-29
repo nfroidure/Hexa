@@ -208,11 +208,22 @@
 			this.form.elements['uint32'].value=this.dataView.getUint32(this.index,littleendian);
 			this.form.elements['int32'].removeAttribute('disabled');
 			this.form.elements['int32'].value=this.dataView.getInt32(this.index,littleendian);
+			this.form.elements['float32'].removeAttribute('disabled');
+			this.form.elements['float32'].value=this.dataView.getFloat32(this.index,littleendian);
 		} else {
 			this.form.elements['uint32'].setAttribute('disabled','disabled');
 			this.form.elements['uint32'].value='';
 			this.form.elements['int32'].setAttribute('disabled','disabled');
 			this.form.elements['int32'].value='';
+			this.form.elements['float32'].setAttribute('disabled','disabled');
+			this.form.elements['float32'].value='';
+		}
+		if(this.index+7<this.dataView.buffer.byteLength) {
+			this.form.elements['float64'].removeAttribute('disabled');
+			this.form.elements['float64'].value=this.dataView.getFloat64(this.index,littleendian);
+		} else {
+			this.form.elements['float64'].setAttribute('disabled','disabled');
+			this.form.elements['float64'].value='';
 		}
 		this.form.elements['index'].setAttribute('max',this.dataView.byteLength-1);
 		this.form.elements['index'].value=this.index;
