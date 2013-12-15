@@ -1,1 +1,4 @@
-www/javascript/libs
+node_modules/*
+*~
+*.swp
+*.swo
