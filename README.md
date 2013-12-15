@@ -1,5 +1,4 @@
-Hexa
-============
+# Hexa
 
 Hexa is a project intended to provide a client side Web based hexadecimal editor.
 
@@ -7,9 +6,10 @@ It's actually currently just a viewer, but the project is going on ;).
 
 You can test it there : http://hexa.insertafter.com
 
-Debugging buffers
--------
-Do not forget to unblock/allow popups.
+## Debugging buffers
+
+Do not forget to unblock/allow popups (or use iframes instead).
+
 ```js
 var hexa=window.open('http://hexa.insertafter.com');
 // Debug TypedArrays/DataViews
@@ -23,11 +23,21 @@ reader.onloadend=function(event) {
 };
 ```
 
-Transferable object are not accessible anymore once transfered. To avoid this, use :
+Transferable object are not accessible anymore once transfered. To avoid this,
+ use :
 
 ```js
 buffer=buffer.slice(0); // not available on IE10
 hexa.postMessage(buffer,'*');
+```
+
+# Contribute
+
+To contribute, just type the following after cloning the repo:
+```js
+npm install --dev
+su npm install grunt-cli -g
+grunt-test
 ```
 
 License

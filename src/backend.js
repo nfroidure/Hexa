@@ -23,7 +23,7 @@ const MIME_TYPES={
 	};
 
 // Global vars
-var rootDirectory=__dirname+'/www', // default directory
+var rootDirectory=__dirname+'/../www', // default directory
 	domain='hexa.insertafter.com',
 	port=8127;
 
@@ -79,8 +79,9 @@ var httpServer=http.createServer(function (request, response) {
 		response.end();
 		return;
 	}
-	// No query params
-	if(parsedUrl.search) {
+	// No query params except for manifest.webapp :'(
+	// Bug : https://bugzilla.mozilla.org/show_bug.cgi?id=897226
+	if(parsedUrl.search&&'/manifest.webapp'!==parsedUrl.pathname) {
 		response.writeHead(401);
 		response.end();
 	}
@@ -108,14 +109,20 @@ var httpServer=http.createServer(function (request, response) {
 				response.end();
 				throw Error('Unsupported MIME type ('+ext+')');
 			}
-			headers['Content-Type']=MIME_TYPES[ext];
+			headers['Content-Type']=MIME_TYPES[ext]+(MIME_TYPES[ext].indexOf('text/')?'; charset=UTF-8':'');
 			headers['Content-Length']=result.size;
+			headers['Vary']='Accept-Encoding';
+			headers['Cache-Control']='public, max-age=864000';
 			// Looking for ranged requests
 			if(request.headers.range) {
 				var chunks = request.headers.range.replace(/bytes=/, "").split("-");
 				start = parseInt(chunks[0],10);
 				end =  chunks[1] ? parseInt(chunks[1], 10) :
-					headers['Content-Length']-1; 
+					headers['Content-Length']-1;
+				if(start >= end) {
+				  response.writeHead(400);
+				  response.end();
+				}
 				headers['Content-Range'] = 'bytes ' + start + '-' + end + '/'
 					+ (headers['Content-Length']);
 				headers['Accept-Ranges'] = 'bytes';
@@ -147,8 +154,7 @@ var httpServer=http.createServer(function (request, response) {
 					ofstream.pipe('gzip'===headers['Content-Encoding']?
 							zlib.createGzip():zlib.createDeflate())
 						.pipe(response);
-				}
-				else {
+				} else {
 					ofstream.pipe(response);
 				}
 			} else {
