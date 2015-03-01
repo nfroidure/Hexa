@@ -5,7 +5,8 @@
   "author": "Nicolas Froidure",
   "main": "src/backend.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "publish": "buildbranch gh-pages www"
   },
   "repository": {
     "type": "git",
@@ -16,23 +17,24 @@
     "url": "https://github.com/nfroidure/hexa/issues"
   },
   "dependencies": {
+    "buildbranch": "0.0.2",
     "commandor": "0.1.1"
   },
   "devDependencies": {
-    "karma": "~0.10.8",
-    "karma-chrome-launcher": "~0.1.1",
-    "karma-firefox-launcher": "~0.1.2",
+    "karma": "~0.12.31",
+    "karma-chrome-launcher": "~0.1.7",
+    "karma-firefox-launcher": "~0.1.4",
     "karma-opera-launcher": "~0.1.0",
-    "grunt": "~0.4.2",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-jshint": "~0.7.2",
-    "grunt-browserify": "~1.3.0",
-    "grunt-parallel": "~0.3.1",
-    "grunt-karma": "~0.6.2",
-    "karma-mocha": "~0.1.1",
-    "karma-chai": "0.0.2",
-    "karma-sinon": "1.0.0",
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-jshint": "~0.11.0",
+    "grunt-browserify": "~3.5.0",
+    "grunt-parallel": "~0.4.1",
+    "grunt-karma": "~0.10.1",
+    "karma-mocha": "~0.1.10",
+    "karma-chai": "0.1.0",
+    "karma-sinon": "1.0.4",
     "karma-effroi": "0.0.0",
     "matchdep": "~0.3.0"
   },
