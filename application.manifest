@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# v 1.00
+
+CACHE:
+/index.html
+/css/styles.css
+/images/favicon.png
+/javascript/production.js
+
+FALLBACK:
+
+NETWORK:
+*
